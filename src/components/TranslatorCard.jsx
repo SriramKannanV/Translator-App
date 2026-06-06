@@ -37,7 +37,7 @@ const Translator = () => {
   }
 
   return (
-    <div className='pl-md-30 mx-auto mx-md-0 mb-md-20 w-115 md:w-full mb-10 relative'>
+    <div className='pl-md-30 mx-auto mx-lg-0 mb-md-20 w-95 md:w-full mb-10 relative'>
       <div className='border border-slate-300 rounded-xl p-6 bg-bg-secondary shadow-xl h-100'>
         <h1 className='font-medium text-lg mb-4'>From: English <i className="fa-solid fa-flag-usa"></i></h1>
         <textarea onChange={(e) => {setChar(e.target.value.length); setInputVal(e.target.value)}} value={inputVal} 

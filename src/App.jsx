@@ -17,7 +17,7 @@ function App() {
     <LanguageContext.Provider value={{selectLang, setSelectLang, translatedText, setTranslatedText, displayLang, setDisplayLang}}>
       <Navbar />
       <Hero />
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4 items-center md:mx-30">
+      <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-4 items-center md:mx-30">
         <TranslatorCard />
         <ResultCard />
       </div>
