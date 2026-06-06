@@ -28,7 +28,7 @@ const ResultCard = () => {
   }
 
   return (
-    <div className='pr-md-30 mx-auto mx-md-0 w-95 md:w-full mb-10'>
+    <div className='pr-md-30 mx-auto mx-md-0 w-85 md:w-full mb-10'>
       <div className='border border-slate-300 rounded-xl p-6 bg-bg-secondary shadow-xl h-100 flex flex-col'>
         <h1 className='font-medium text-lg mb-4'>Translated Text</h1>
         <textarea className='bg-bg-primary w-full border border-slate-200 rounded-xl p-2 mb-8 focus:outline-accent flex-1' defaultValue={translatedText} placeholder='Translated Text...' style={{resize: "none"}}></textarea>

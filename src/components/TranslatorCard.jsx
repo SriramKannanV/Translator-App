@@ -1,4 +1,4 @@
-import React, { useContext, useState, useSyncExternalStore } from 'react'
+import React, { useContext, useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import SelectLanguage from './SelectLanguage'
 import { LanguageContext } from './LanguageContext';
 import { translateText } from "../services/translateApi"
@@ -10,6 +10,7 @@ const Translator = () => {
   const [inputVal, setInputVal] = useState("");
   const [loading, setLoading] = useState("Translate")
   const [error, setError] = useState("");
+  const dropdownRef = useRef(null);
 
   const {selectLang, setSelectLang, setTranslatedText, translatedText, displayLang, setDisplayLang} = useContext(LanguageContext);
 
@@ -36,8 +37,22 @@ const Translator = () => {
     setChar(0);
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
+        setDropDown(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [dropdDown])
+
   return (
-    <div className='pl-md-30 mx-auto mx-lg-0 mb-md-20 w-95 md:w-full mb-10 relative'>
+    <div className='pl-md-30 mx-auto mx-lg-0 mb-md-20 w-85 md:w-full mb-10 relative'>
       <div className='border border-slate-300 rounded-xl p-6 bg-bg-secondary shadow-xl h-100'>
         <h1 className='font-medium text-lg mb-4'>From: English <i className="fa-solid fa-flag-usa"></i></h1>
         <textarea onChange={(e) => {setChar(e.target.value.length); setInputVal(e.target.value)}} value={inputVal} 
@@ -50,7 +65,7 @@ const Translator = () => {
           <h1 className='font-medium text-lg'>Translate to</h1>
 
           <div onClick={() => setDropDown((prev) => !prev)} 
-          className={`flex justify-between my-1 border border-text-primary w-42 py-1.5 px-3 rounded-md content-center mb-8 cursor-pointer ${error ? "ring-2 ring-red-500 border-transparent" : ""}`}>
+          className={`flex justify-between my-1 border border-text-primary w-42 py-1.5 px-3 rounded-md content-center mb-8 cursor-pointer ${error ? "ring-2 ring-red-500 border-transparent border-none" : ""}`}>
             <p className='text-sm'>{displayLang}</p>
             <i className="fa-solid fa-sort-down"></i>
           </div>
@@ -70,7 +85,7 @@ const Translator = () => {
       </div>
 
       {dropdDown ? (
-        <div onClick={() => setDropDown(false)} className='absolute top-73 left-36'>
+        <div ref={dropdownRef} onClick={() => setDropDown(false)} className='absolute top-73 left-36'>
           <SelectLanguage />
         </div>
       ) : ""}
